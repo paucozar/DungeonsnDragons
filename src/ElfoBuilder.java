@@ -28,6 +28,21 @@ public class ElfoBuilder implements PersonajeBuilder {
     }
 
     @Override
+    public void setGAC0() {
+        personaje.setGAC0(19); // GAC0 para elfos nivel 1
+    }
+
+    @Override
+    public void setTiradasSalvacion() {
+        personaje.setTiradasSalvacion(new int[]{12, 13, 13, 15, 15}); // Valores de la tabla del Elfo
+    }
+
+    @Override
+    public void setMonedasOro() {
+        personaje.setMonedasOro(AtributosAleatorios.tirar3d6x10());
+    }
+
+    @Override
     public Personaje getPersonaje() {
         return personaje;
     }
@@ -36,3 +51,4 @@ public class ElfoBuilder implements PersonajeBuilder {
         personaje = new Personaje();
     }
 }
+

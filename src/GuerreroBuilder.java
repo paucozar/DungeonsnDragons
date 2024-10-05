@@ -28,6 +28,21 @@ public class GuerreroBuilder implements PersonajeBuilder {
     }
 
     @Override
+    public void setGAC0() {
+        personaje.setGAC0(19); // GAC0 para guerreros nivel 1
+    }
+
+    @Override
+    public void setTiradasSalvacion() {
+        personaje.setTiradasSalvacion(new int[]{12, 13, 14, 15, 16}); // Valores de la tabla del Guerrero&#8203;:contentReference[oaicite:0]{index=0}
+    }
+
+    @Override
+    public void setMonedasOro() {
+        personaje.setMonedasOro(AtributosAleatorios.tirar3d6x10());
+    }
+
+    @Override
     public Personaje getPersonaje() {
         return personaje;
     }
@@ -36,4 +51,3 @@ public class GuerreroBuilder implements PersonajeBuilder {
         personaje = new Personaje();
     }
 }
-

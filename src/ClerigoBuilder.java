@@ -28,6 +28,21 @@ public class ClerigoBuilder implements PersonajeBuilder {
     }
 
     @Override
+    public void setGAC0() {
+        personaje.setGAC0(19); // GAC0 para clérigos nivel 1
+    }
+
+    @Override
+    public void setTiradasSalvacion() {
+        personaje.setTiradasSalvacion(new int[]{11, 12, 14, 16, 15}); // Valores de la tabla del Clérigo
+    }
+
+    @Override
+    public void setMonedasOro() {
+        personaje.setMonedasOro(AtributosAleatorios.tirar3d6x10());
+    }
+
+    @Override
     public Personaje getPersonaje() {
         return personaje;
     }

@@ -24,7 +24,22 @@ public class MedianoBuilder implements PersonajeBuilder {
 
     @Override
     public void setIdiomaHablado() {
-        personaje.setIdiomaHablado("Común");
+        personaje.setIdiomaHablado("Mediano");
+    }
+
+    @Override
+    public void setGAC0() {
+        personaje.setGAC0(19); // GAC0 para medianos nivel 1
+    }
+
+    @Override
+    public void setTiradasSalvacion() {
+        personaje.setTiradasSalvacion(new int[]{8, 9, 10, 13, 12}); // Valores de la tabla del Mediano
+    }
+
+    @Override
+    public void setMonedasOro() {
+        personaje.setMonedasOro(AtributosAleatorios.tirar3d6x10());
     }
 
     @Override

@@ -28,6 +28,21 @@ public class MagoBuilder implements PersonajeBuilder {
     }
 
     @Override
+    public void setGAC0() {
+        personaje.setGAC0(19); // GAC0 para magos nivel 1
+    }
+
+    @Override
+    public void setTiradasSalvacion() {
+        personaje.setTiradasSalvacion(new int[]{13, 14, 13, 16, 15}); // Valores de la tabla del Mago&#8203;:contentReference[oaicite:1]{index=1}
+    }
+
+    @Override
+    public void setMonedasOro() {
+        personaje.setMonedasOro(AtributosAleatorios.tirar3d6x10());
+    }
+
+    @Override
     public Personaje getPersonaje() {
         return personaje;
     }
@@ -36,3 +51,4 @@ public class MagoBuilder implements PersonajeBuilder {
         personaje = new Personaje();
     }
 }
+

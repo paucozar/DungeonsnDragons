@@ -1,4 +1,5 @@
 // Main.java
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -9,9 +10,9 @@ public class Main {
         System.out.println("¡Bienvenido al creador de personajes!");
 
         // Generar atributos aleatorios iniciales
-        PersonajeBuilder genericBuilder = new GenericPersonajeBuilder();
+        GenericPersonajeBuilder genericBuilder = new GenericPersonajeBuilder();
         director.setPersonajeBuilder(genericBuilder);
-        director.construirPersonaje("Sin alineamiento");
+        director.construirPersonaje("Sin alineamiento"); // Construir el personaje genérico
         Personaje tempPersonaje = director.getPersonaje();
 
         // Mostrar atributos generados
@@ -38,78 +39,95 @@ public class Main {
             System.out.println("7. Mediano (Requiere Destreza >= 9 y Constitución >= 9)");
             System.out.print("Ingresa el número de tu elección: ");
 
-            int eleccion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+            try {
+                int eleccion = scanner.nextInt();
+                scanner.nextLine(); // Consumir el salto de línea
 
-            switch (eleccion) {
-                case 1:
-                    builder = new MagoBuilder();
-                    eleccionValida = true;
-                    break;
-                case 2:
-                    builder = new GuerreroBuilder();
-                    eleccionValida = true;
-                    break;
-                case 3:
-                    builder = new LadronBuilder();
-                    eleccionValida = true;
-                    break;
-                case 4:
-                    builder = new ClerigoBuilder();
-                    eleccionValida = true;
-                    break;
-                case 5:
-                    if (tempPersonaje.getInteligencia() >= 9) {
-                        builder = new ElfoBuilder();
+                switch (eleccion) {
+                    case 1:
+                        builder = new MagoBuilder();
                         eleccionValida = true;
-                    } else {
-                        System.out.println("No cumples con los requisitos para ser un Elfo (Inteligencia >= 9).");
-                    }
-                    break;
-                case 6:
-                    if (tempPersonaje.getConstitucion() >= 9) {
-                        builder = new EnanoBuilder();
+                        break;
+                    case 2:
+                        builder = new GuerreroBuilder();
                         eleccionValida = true;
-                    } else {
-                        System.out.println("No cumples con los requisitos para ser un Enano (Constitución >= 9).");
-                    }
-                    break;
-                case 7:
-                    if (tempPersonaje.getDestreza() >= 9 && tempPersonaje.getConstitucion() >= 9) {
-                        builder = new MedianoBuilder();
+                        break;
+                    case 3:
+                        builder = new LadronBuilder();
                         eleccionValida = true;
-                    } else {
-                        System.out.println("No cumples con los requisitos para ser un Mediano (Destreza >= 9 y Constitución >= 9).");
-                    }
-                    break;
-                default:
-                    System.out.println("Opción no válida. Inténtalo de nuevo.");
+                        break;
+                    case 4:
+                        builder = new ClerigoBuilder();
+                        eleccionValida = true;
+                        break;
+                    case 5:
+                        if (tempPersonaje.getInteligencia() >= 9) {
+                            builder = new ElfoBuilder();
+                            eleccionValida = true;
+                        } else {
+                            System.out.println("No cumples con los requisitos para ser un Elfo (Inteligencia >= 9).");
+                        }
+                        break;
+                    case 6:
+                        if (tempPersonaje.getConstitucion() >= 9) {
+                            builder = new EnanoBuilder();
+                            eleccionValida = true;
+                        } else {
+                            System.out.println("No cumples con los requisitos para ser un Enano (Constitución >= 9).");
+                        }
+                        break;
+                    case 7:
+                        if (tempPersonaje.getDestreza() >= 9 && tempPersonaje.getConstitucion() >= 9) {
+                            builder = new MedianoBuilder();
+                            eleccionValida = true;
+                        } else {
+                            System.out.println("No cumples con los requisitos para ser un Mediano (Destreza >= 9 y Constitución >= 9).");
+                        }
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Inténtalo de nuevo.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Opción no válida. Por favor ingresa un número.");
+                scanner.nextLine(); // Limpiar el buffer
             }
         }
 
         // Elección del alineamiento
-        System.out.println("\nElige el alineamiento de tu personaje:");
-        System.out.println("1. Caótico");
-        System.out.println("2. Legal");
-        System.out.println("3. Neutral");
-        System.out.print("Ingresa el número de tu elección: ");
-
         String alineamiento = "";
-        int alineamientoEleccion = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea
+        boolean alineamientoValido = false;
 
-        switch (alineamientoEleccion) {
-            case 1:
-                alineamiento = "Caótico";
-                break;
-            case 2:
-                alineamiento = "Legal";
-                break;
-            case 3:
-                alineamiento = "Neutral";
-                break;
-            default:
-                alineamiento = "Neutral";
+        while (!alineamientoValido) {
+            System.out.println("\nElige el alineamiento de tu personaje:");
+            System.out.println("1. Caótico");
+            System.out.println("2. Legal");
+            System.out.println("3. Neutral");
+            System.out.print("Ingresa el número de tu elección: ");
+
+            try {
+                int alineamientoEleccion = scanner.nextInt();
+                scanner.nextLine(); // Consumir el salto de línea
+
+                switch (alineamientoEleccion) {
+                    case 1:
+                        alineamiento = "Caótico";
+                        alineamientoValido = true;
+                        break;
+                    case 2:
+                        alineamiento = "Legal";
+                        alineamientoValido = true;
+                        break;
+                    case 3:
+                        alineamiento = "Neutral";
+                        alineamientoValido = true;
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Inténtalo de nuevo.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Opción no válida. Por favor ingresa un número.");
+                scanner.nextLine(); // Limpiar el buffer
+            }
         }
 
         // Construir el personaje final
@@ -124,3 +142,5 @@ public class Main {
         scanner.close();
     }
 }
+
+
